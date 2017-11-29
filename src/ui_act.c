@@ -642,11 +642,16 @@ BarUiActCallback(BarUiActBookmark) {
 	}
 }
 
+void BarDisplayVolume(const BarSettings_t *settings) {
+	BarUiMsg (settings, MSG_INFO, "Volume %i\n", settings->volume);
+}
+
 /*	decrease volume
  */
 BarUiActCallback(BarUiActVolDown) {
 	--app->settings.volume;
 	BarPlayerSetVolume (&app->player);
+	BarDisplayVolume(&app->settings);
 }
 
 /*	increase volume
@@ -654,6 +659,7 @@ BarUiActCallback(BarUiActVolDown) {
 BarUiActCallback(BarUiActVolUp) {
 	++app->settings.volume;
 	BarPlayerSetVolume (&app->player);
+	BarDisplayVolume(&app->settings);
 }
 
 /*	reset volume
